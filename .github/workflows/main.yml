@@ -22,7 +22,7 @@ jobs:
           path: .git/lfs
           key: ${{ runner.os }}-lfs-${{ hashFiles('.lfs-assets-id') }}
 
-      - name: Git LFS Pull
+      - name: Git LFS Pull 
         run: |
           git lfs pull
           git add .
@@ -37,8 +37,10 @@ jobs:
             Library-
 
       # Build
-      - name: Build project
-        uses: game-ci/unity-builder@v2
+      - name: Build project 📦
+        - uses: game-ci/unity-builder@v2
+          with:
+            customImage: 'unityci/editor:2021.3.16f1'
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
