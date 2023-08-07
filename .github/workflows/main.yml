@@ -1,5 +1,5 @@
-name: Actions 😎
-
+name: Unity WebGL Automatic Build 😎
+run-name: ${{ github.actor }} is Unity WebGL Automatic Builds
 on: [push, pull_request]
 
 jobs:
