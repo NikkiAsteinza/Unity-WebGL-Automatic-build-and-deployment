@@ -1,5 +1,5 @@
-name: Unity WebGL Automatic Build 😎
-run-name: ${{ github.actor }} is Unity WebGL Automatic Builds
+name: Unity WebGL Automatic Build 👽
+run-name: ${{ github.actor }} has merged to main. Deployment launched.
 on: [push, pull_request]
 
 jobs:
