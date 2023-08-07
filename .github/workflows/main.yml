@@ -44,8 +44,8 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          targetPlatform: 
-          unityVersion: '2021.3.16f1'
+          targetPlatform: WebGL
+          unityEditor: 2021.3.16f1
           allowDirtyBuild: true
 
       # Output
