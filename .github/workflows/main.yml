@@ -45,7 +45,7 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: WebGL
-          unityEditor: 2021.3.16f1
+          unityVersion: 2021.3.16f1
           allowDirtyBuild: true
 
       # Output
