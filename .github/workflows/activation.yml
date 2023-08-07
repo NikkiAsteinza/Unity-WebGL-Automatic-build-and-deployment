@@ -1,5 +1,5 @@
 name: Acquire activation file
- on: [push, pull_request]
+on: [push, pull_request]
 jobs:
   activation:
     name: Request manual activation file 🔑
