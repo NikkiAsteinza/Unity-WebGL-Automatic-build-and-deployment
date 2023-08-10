@@ -1,10 +1,15 @@
-name: Unity WebGL Automatic Build 👽
-run-name: ${{ github.actor }} has merged to main. Deployment launched.
-on: [push, pull_request]
+name: Unity WebGL Automatic Build and Deploy 👽
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
-    name: Build my project ✨
+    name: Build Project ✨
     runs-on: ubuntu-latest
     steps:
       # Checkout (without LFS)
@@ -16,7 +21,7 @@ jobs:
         run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
 
       - name: Restore LFS cache
-        uses: actions/cache@v3
+        uses: actions/cache@v2
         id: lfs-cache
         with:
           path: .git/lfs
@@ -29,7 +34,7 @@ jobs:
           git reset --hard
 
       # Cache
-      - uses: actions/cache@v3
+      - uses: actions/cache@v2
         with:
           path: Library
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
@@ -46,9 +51,46 @@ jobs:
         with:
           targetPlatform: WebGL
           allowDirtyBuild: true
+        id: build
 
-      # Output
-      - uses: actions/upload-artifact@v3
+      # Upload Build Artifact
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v2
         with:
           name: Build
           path: build
+
+  deploy:
+    name: Deploy to GitLab Pages 🚀
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      # Checkout (without LFS)
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Deploy to GitLab Pages
+      - name: Deploy to GitLab Pages
+        uses: actions/checkout@v2
+        with:
+          repository: <gitlab-username>/<gitlab-repository>
+          ref: main
+          path: deployment
+
+      # Clean existing files from GitLab Pages directory
+      - name: Clean GitLab Pages directory
+        run: rm -rf deployment/*
+
+      # Copy build artifacts to GitLab Pages directory
+      - name: Copy build artifacts to GitLab Pages directory
+        run: cp -r build/* deployment/
+
+      # Commit and Push changes to GitLab Pages
+      - name: Commit and Push changes to GitLab Pages
+        run: |
+          cd deployment
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git add .
+          git commit -m "Update GitLab Pages with Unity WebGL build by ${{ github.actor }}"
+          git push
