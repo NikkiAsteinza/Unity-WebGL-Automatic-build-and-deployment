@@ -1,8 +1,5 @@
 name: Unity WebGL Automatic Build 👽✨🚀
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
