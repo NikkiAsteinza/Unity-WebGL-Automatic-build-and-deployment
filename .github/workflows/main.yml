@@ -49,6 +49,7 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: WebGL
+          buildsPath: build
           allowDirtyBuild: true
 
       # Output
@@ -71,4 +72,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.PAT }}
-          publish_dir: .
+          publish_dir: build
