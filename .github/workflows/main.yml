@@ -56,7 +56,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Build
-          path: ./gh-page
+          path: build
 
   deploy:
     name: Deploy to GitHub Pages 🚀
@@ -71,4 +71,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.PAT }}
-          publish_dir: ./gh-page
+          publish_dir: build
