@@ -1,8 +1,10 @@
 name: Unity WebGL Automatic Build 👽✨🚀
 on:
-  pull_request:
-    branches:
-      - main
+  push:
+    branches: '**'
+  # pull_request:
+  #   branches:
+  #     - main
 
 jobs:
   build:
@@ -54,7 +56,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Build
-          path: ./public
+          path: ./gh-page
 
   deploy:
     name: Deploy to GitHub Pages 🚀
@@ -69,4 +71,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.PAT }}
-          publish_dir: ./public
+          publish_dir: ./gh-page
