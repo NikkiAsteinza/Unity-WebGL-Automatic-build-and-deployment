@@ -69,7 +69,9 @@ jobs:
 
       # Deploy to GitHub Pages using peaceiris/actions-gh-pages
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@4.1.3
         with:
-          personal_token: ${{ secrets.PAT }}
-          publish_dir: .
+          branch: gh-pages
+          folder: .
+          commit-message: Deploy
+          single-commit: true
