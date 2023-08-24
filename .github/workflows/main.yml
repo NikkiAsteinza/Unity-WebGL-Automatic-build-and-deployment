@@ -68,7 +68,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Create folder
         run: |
-          mkdir -p docs && cp -R docs
+          mkdir -p docs
           ls docs
       # Deploy to GitHub Pages using peaceiris/actions-gh-pages
       - name: Deploy to GitHub Pages
