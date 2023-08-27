@@ -61,6 +61,11 @@ jobs:
         with:
           name: Build
           path: Build/WebGL
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.PAT }}
+          publish_dir: Build/WebGL
       # Output
       # - name: Create Sample Data
       #   run: |
@@ -109,20 +114,20 @@ jobs:
   #         destination: ./site
   #     - name: Upload artifact
   #       uses: actions/upload-pages-artifact@v2
-  deploy:
-    name: Deploy to GitHub Pages 🚀
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+  # deploy:
+  #   name: Deploy to GitHub Pages 🚀
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v2
 
-      # Deploy to GitHub Pages using peaceiris/actions-gh-pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          personal_token: ${{ secrets.PAT }}
-          publish_dir: Build/WebGL
+  #     # Deploy to GitHub Pages using peaceiris/actions-gh-pages
+  #     - name: Deploy to GitHub Pages
+  #       uses: peaceiris/actions-gh-pages@v3
+  #       with:
+  #         personal_token: ${{ secrets.PAT }}
+  #         publish_dir: Build/WebGL
   # deploy:
   #   name: Page Deployment 🚀
   #   environment:
