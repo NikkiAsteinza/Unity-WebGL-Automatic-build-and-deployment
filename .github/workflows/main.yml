@@ -62,10 +62,14 @@ jobs:
           SRC_FOLDER_PATH: 'Build'
           TARGET_BRANCH: 'gh-pages'
         run: |
-          git checkout -b gh-pages
+          git stash push -- Build
+          git reset --hard
+          git checkout gh-pages
+          git stash apply stash@{0}
           git add *
           git commit -m "deployment"
           git push
+          git stash pop stash@{0}
 # Build job
 
 
