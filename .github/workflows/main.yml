@@ -59,15 +59,19 @@ jobs:
       # Output
       - name: Deploy to gh-page branch
         run: |
+          cd ./Build
           ls
-          git stash push -- ./Build
+          git add .
+          git stash save --keep-index "Latest build"
+          git stash list
           git reset --hard
           git checkout gh-pages
-          git stash apply stash@{0}
+          git stash apply "Latest build"
           git add *
-          git commit -m "deployment"
+          git commit -m "Deployment"
           git push
-          git stash pop stash@{0}
+          git stash pop "Latest build"
+          git stash list
 # Build job
 
 
