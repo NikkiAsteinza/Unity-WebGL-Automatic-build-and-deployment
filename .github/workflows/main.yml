@@ -59,7 +59,8 @@ jobs:
       # Output
       - name: Deploy to gh-page branch
         run: |
-          sudo mkdir /Build/WebGL/ && sudo touch /Build/WebGL/hola.txt
+          sudo mkdir /Build/
+          sudo touch /Build/hola.txt
           ls
           git config --global user.email "${{ secrets.GH_EMAIL }}"
           git config --global user.name "${{ secrets.GH_USERNAME }}"
