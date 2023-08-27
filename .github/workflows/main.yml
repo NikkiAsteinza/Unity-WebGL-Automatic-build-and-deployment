@@ -63,46 +63,62 @@ jobs:
           name: Unity build
           path: Build
 # Build job
-  jekyll:
-    name: Jekyll Build ✨
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./Build/WebGL/WebGL/
-          destination: ./site
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
   deploy:
-    name: Page Deployment 🚀
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: jekyll
+    name: Build and Push 🚀
     steps:
-      - name: Deploy to GitHub Pages 🚀
-        id: deployment
-        uses: actions/deploy-pages@v2
-    # name: 
-    # runs-on: ubuntu-latest
-    # needs: build
-    # steps:
-    #   - name: Checkout repository
-    #     uses: actions/checkout@v2
-    #   - name: Create folder
-    #     run: |
-    #       mkdir -p docs
-    #       ls docs
-    #   # Deploy to GitHub Pages using peaceiris/actions-gh-pages
-    #   - name: Deploy to GitHub Pages
-    #     uses: peaceiris/actions-gh-pages@v3
-    #     with:
-    #       personal_token: ${{ secrets.PAT }}
-    #       publish_dir: docs
+      - name: git-checkout
+        uses: actions/checkout@v2
+
+      - name: Push
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: gh-pages # The branch name where you want to push the assets
+          FOLDER: build # The directory where your assets are generated
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
+          MESSAGE: "Build: ({sha}) {msg}" # The commit message
+  # jekyll:
+  #   name: Jekyll Build ✨
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #     - name: Setup Pages
+  #       uses: actions/configure-pages@v3
+  #     - name: Build with Jekyll
+  #       uses: actions/jekyll-build-pages@v1
+  #       with:
+  #         source: ./Build/WebGL/WebGL/
+  #         destination: ./site
+  #     - name: Upload artifact
+  #       uses: actions/upload-pages-artifact@v2
+  # deploy:
+  #   name: Page Deployment 🚀
+  #   environment:
+  #     name: github-pages
+  #     url: ${{ steps.deployment.outputs.page_url }}
+  #   runs-on: ubuntu-latest
+  #   needs: jekyll
+  #   steps:
+  #     - name: Deploy to GitHub Pages 🚀
+  #       id: deployment
+  #       uses: actions/deploy-pages@v2
+  #  page:
+  #     name: Page Deployment 🚀
+  #     runs-on: ubuntu-latest
+  #     needs: build
+  #     steps:
+  #       - name: Checkout repository
+  #         uses: actions/checkout@v2
+  #       - name: Create folder
+  #         run: |
+  #           mkdir -p docs
+  #           ls docs
+  #       # Deploy to GitHub Pages using peaceiris/actions-gh-pages
+  #       - name: Deploy to GitHub Pages
+  #         uses: peaceiris/actions-gh-pages@v3
+  #         with:
+  #           personal_token: ${{ secrets.PAT }}
+  #           publish_dir: docs
