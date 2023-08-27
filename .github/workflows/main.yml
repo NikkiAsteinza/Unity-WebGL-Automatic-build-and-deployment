@@ -62,19 +62,21 @@ jobs:
       #     name: Build
       #     path: build
       # Output
-      - name: Create Sample Data
+      # - name: Create Sample Data
+      #   run: |
+
+      # - name: Git Config
+      #   run: |
+
+
+      - name: Deploy to gh-page branch
         run: |
           sudo mkdir /Build
           sudo touch /Build/hola.txt
           ls
-      - name: Git Config
-        run: |
           git config --global user.email "${{ secrets.GH_EMAIL }}"
           git config --global user.name "${{ secrets.GH_USERNAME }}"
           ls
-
-      - name: Deploy to gh-page branch
-        run: |
           git add /Build/*
           git status
           git stash save --keep-index "Latest build"
