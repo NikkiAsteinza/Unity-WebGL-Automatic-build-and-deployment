@@ -60,9 +60,9 @@ jobs:
       - name: Deploy to gh-page branch
         run: |
           git config --global user.email "${{ secrets.GH_EMAIL }}"
-          git config --global user.name ${{ secrets.GH_USERNAME }}"
+          git config --global user.name "${{ secrets.GH_USERNAME }}"
           cd ./Build/WebGL
-          sudo chown -R ${{ secrets.GH_USERNAME }} .
+          sudo chown -R "${{ secrets.GH_USERNAME }}" .
           ls
           git add .
           git stash save --keep-index "Latest build"
