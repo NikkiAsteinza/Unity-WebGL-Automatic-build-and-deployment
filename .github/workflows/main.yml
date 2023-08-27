@@ -2,14 +2,14 @@ name: Unity WebGL Automatic Build 👽✨🚀
 on:
   push:
     branches: '**'
-  workflow_dispatch:
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+#   workflow_dispatch:
+# permissions:
+#   contents: read
+#   pages: write
+#   id-token: write
+# concurrency:
+#   group: "pages"
+#   cancel-in-progress: false
 jobs:
   build:
     name: Unity Build 👽
@@ -58,11 +58,9 @@ jobs:
 
       # Output
       - name: Deploy to gh-page branch
-        env:
-          SRC_FOLDER_PATH: 'Build'
-          TARGET_BRANCH: 'gh-pages'
         run: |
-          git stash push -- Build
+          ls
+          git stash push -- ./Build
           git reset --hard
           git checkout gh-pages
           git stash apply stash@{0}
