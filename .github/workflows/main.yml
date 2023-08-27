@@ -62,22 +62,17 @@ jobs:
         with:
           name: Unity build
           path: Build
-# Build job
-  deploy:
-    runs-on: ubuntu-latest
-    name: Build and Push 🚀
-    steps:
-      - name: git-checkout
-        uses: actions/checkout@v2
-
-      - name: Push
+      - name: Deploy to gh-pages
         uses: s0/git-publish-subdir-action@develop
         env:
           REPO: self
           BRANCH: gh-pages # The branch name where you want to push the assets
-          FOLDER: build # The directory where your assets are generated
+          FOLDER: Build # The directory where your assets are generated
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
           MESSAGE: "Build: ({sha}) {msg}" # The commit message
+# Build job
+
+
   # jekyll:
   #   name: Jekyll Build ✨
   #   runs-on: ubuntu-latest
