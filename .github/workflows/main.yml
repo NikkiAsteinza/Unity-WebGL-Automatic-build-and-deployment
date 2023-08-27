@@ -57,19 +57,20 @@ jobs:
           allowDirtyBuild: true
 
       # Output
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: Unity build
-          path: Build
-      - name: Deploy to gh-pages
-        uses: s0/git-publish-subdir-action@develop
+      - name: copy
         env:
-          REPO: self
-          BRANCH: gh-pages # The branch name where you want to push the assets
-          FOLDER: Build # The directory where your assets are generated
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
-          MESSAGE: "Build: ({sha}) {msg}" # The commit message
+          SRC_FOLDER_PATH: 'Build'
+          TARGET_BRANCH: 'gh-pages'
+        run: |
+          files=$(find $SRC_FOLDER_PATH -type f) # get the file list
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git fetch                         # fetch branches
+          git checkout $TARGET_BRANCH       # checkout to your branch
+          git checkout ${GITHUB_REF##*/} -- $files # copy files from the source branch
+          git add -A
+          git diff-index --quiet HEAD ||  git commit -am "deploy files"  # commit to the repository (ignore if no modification)
+          git push origin $TARGET_BRANCH # push to remote branch
 # Build job
 
 
