@@ -60,12 +60,14 @@ jobs:
       - name: Deploy to gh-page branch
         run: |
           sudo mkdir -p /Build/WebGL/ && sudo touch /Build/WebGL/hola.txt
+          ls
           git config --global user.email "${{ secrets.GH_EMAIL }}"
           git config --global user.name "${{ secrets.GH_USERNAME }}"
-          cd ./Build/WebGL
-          sudo chown -R "${{ secrets.GH_USERNAME }}" .
+          cd /Build/WebGL/
           ls
+          sudo chown -R "${{ secrets.GH_USERNAME }}" .
           git add .
+          git status
           git stash save --keep-index "Latest build"
           git stash list
           git reset --hard
