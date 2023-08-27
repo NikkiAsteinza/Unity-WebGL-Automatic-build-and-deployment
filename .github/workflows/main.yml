@@ -2,14 +2,14 @@ name: Unity WebGL Automatic Build 👽✨🚀
 on:
   push:
     branches: '**'
-#   workflow_dispatch:
-# permissions:
-#   contents: read
-#   pages: write
-#   id-token: write
-# concurrency:
-#   group: "pages"
-#   cancel-in-progress: false
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 jobs:
   build:
     name: Unity Build 👽
@@ -59,7 +59,10 @@ jobs:
       # Output
       - name: Deploy to gh-page branch
         run: |
-          cd ./Build
+          git config --global user.email "${{ secrets.GH_EMAIL }}"
+          git config --global user.name ${{ secrets.GH_USERNAME }}"
+          cd ./Build/WebGL
+          sudo chown -R ${{ secrets.GH_USERNAME }} .
           ls
           git add .
           git stash save --keep-index "Latest build"
