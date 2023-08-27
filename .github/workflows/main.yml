@@ -77,6 +77,7 @@ jobs:
           git config --global user.email "${{ secrets.GH_EMAIL }}"
           git config --global user.name "${{ secrets.GH_USERNAME }}"
           ls
+          cd ..
           git add /Build/*
           git status
           git stash save --keep-index "Latest build"
