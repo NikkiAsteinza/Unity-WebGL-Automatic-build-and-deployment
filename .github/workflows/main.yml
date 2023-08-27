@@ -53,7 +53,7 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: WebGL
-          buildsPath: docs
+          buildsPath: Build
           allowDirtyBuild: true
 
       # Output
@@ -61,7 +61,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Unity build
-          path: docs
+          path: Build
 # Build job
   jekyll:
     name: Jekyll Build ✨
@@ -75,8 +75,8 @@ jobs:
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ./build
-          destination: ./
+          source: ./Build/WebGL/WebGL/
+          destination: ./site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
   deploy:
