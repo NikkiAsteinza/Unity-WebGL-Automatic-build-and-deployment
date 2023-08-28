@@ -83,7 +83,7 @@ jobs:
           git reset --hard
           sudo git clean -d -x -f
           echo "Restoring branch"
-          git rm -r .
+          git rm -r ./Build
           git commit -m "Cleaning branch"
           git push
           echo "Applying stash"
