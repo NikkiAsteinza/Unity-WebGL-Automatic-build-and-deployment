@@ -63,7 +63,7 @@ jobs:
           name: Build
           path: Build/WebGL
       # Deployment
-      - name: Deploy to gh-page branch
+      - name: Stash build result and reset local changes
         run: |
           echo "Applying initial configs"
           sudo chown -R $USER:$USER Build
@@ -75,6 +75,9 @@ jobs:
           git stash list
           git reset --hard
           sudo git clean -d -x -f
+    # Deployment
+      - name: Apply stashed files to gh-pages
+        run: |
           echo "Switch to gh-pages"
           git switch -f gh-pages
           git reset --hard
@@ -85,7 +88,7 @@ jobs:
           git push
           echo "Applying stash"
           git stash apply stash@{0}
-          mv -f Build/subdirectory/{.,}* .
+          mv -f Build/WebGL/WebGL/{.,}* .
           git status
           git add *
           git commit -m "Deployment"
