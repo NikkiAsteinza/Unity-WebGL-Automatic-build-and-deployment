@@ -73,7 +73,8 @@ jobs:
           git stash push
           git stash list
           git reset --hard
-          git checkout gh-pages
+          git switch -f gh-pages
+          echo "Applying stash"
           git stash apply stash@{0}
           git status
           git add *
