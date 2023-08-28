@@ -82,10 +82,7 @@ jobs:
           git switch -f gh-pages
           git reset --hard
           sudo git clean -d -x -f
-          echo "Restoring branch"
-          git rm -r ./Build/*
-          git commit -m "Cleaning branch"
-          git push
+          
       - name: Apply stashed files to gh-pages
         run: |
           echo "Applying stash"
