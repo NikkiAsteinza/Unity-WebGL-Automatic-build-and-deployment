@@ -84,21 +84,22 @@ jobs:
       #     TARGET_DIR: "."
       - name: Deploy to gh-page branch
         run: |
+          git stash pop stash@{0}
           sudo chown -R $USER:$USER Build
           git config --global user.email "${{ secrets.GH_EMAIL }}"
           git config --global user.name "${{ secrets.GH_USERNAME }}"
           ls
           git add Build/WebGL/*
           git status
-          git stash save --keep-index "Latest build"
+          git stash push -m "LatestBuild"
           git stash list
           git reset --hard
           git checkout gh-pages
-          git stash apply "Latest build"
+          git stash apply stash@{0}
           git add *
           git commit -m "Deployment"
           git push
-          git stash pop "Latest build"
+          git stash pop stash@{0}
           git stash list
 # Build job
 
