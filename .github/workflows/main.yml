@@ -69,9 +69,9 @@ jobs:
           git config --global user.email "${{ secrets.GH_EMAIL }}"
           git config --global user.name "${{ secrets.GH_USERNAME }}"
           ls
-          git add Build/Build
-          git add Build/TemplateData
-          git add Build/index.html
+          git add ./Build/WebGL/Build
+          git add ./Build/WebGL/TemplateData
+          git add ./Build/WebGL/index.html
           git stash push
           git stash list
           git reset --hard
