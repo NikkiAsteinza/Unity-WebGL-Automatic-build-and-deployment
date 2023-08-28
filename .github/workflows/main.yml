@@ -74,11 +74,11 @@ jobs:
           git stash push
           git stash list
           git reset --hard
-          git clean -d -x -f
+          sudo git clean -d -x -f
           echo "Switch to gh-pages"
           git switch -f gh-pages
           git reset --hard
-          git clean -d -x -f
+          sudo git clean -d -x -f
           echo "Applying stash"
           git stash apply stash@{0}
           git status
@@ -86,4 +86,4 @@ jobs:
           git commit -m "Deployment"
           git push
           git reset --hard
-          git clean -d -x -f
+          sudo git clean -d -x -f
