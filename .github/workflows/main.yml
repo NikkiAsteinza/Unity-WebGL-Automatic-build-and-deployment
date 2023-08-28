@@ -88,17 +88,13 @@ jobs:
           git config --global user.email "${{ secrets.GH_EMAIL }}"
           git config --global user.name "${{ secrets.GH_USERNAME }}"
           ls
-          git add Build/WebGL/*
-          git status
-          git stash push -m "LatestBuild"
+          git stash push -- Build/WebGL/*
           git stash list
           git reset --hard
           git checkout gh-pages
           git stash apply stash@{0}
-          git add *
-          git commit -m "Deployment"
           git push
-          git stash pop stash@{0}
+          git reset --hard
 # Build job
 
 
