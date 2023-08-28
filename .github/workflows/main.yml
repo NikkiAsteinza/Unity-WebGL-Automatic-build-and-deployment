@@ -65,10 +65,6 @@ jobs:
       # Deployment
       - name: Deploy to gh-page branch
         run: |
-          echo "Restoring branch"
-          git rm -r --cached ~/.
-          git commit -m "Cleaning branch"
-          git push
           echo "Applying initial configs"
           sudo chown -R $USER:$USER Build
           git config --global user.email "${{ secrets.GH_EMAIL }}"
@@ -83,6 +79,10 @@ jobs:
           git switch -f gh-pages
           git reset --hard
           sudo git clean -d -x -f
+          echo "Restoring branch"
+          git rm -r .
+          git commit -m "Cleaning branch"
+          git push
           echo "Applying stash"
           git stash apply stash@{0}
           mv -f Build/subdirectory/{.,}* .
