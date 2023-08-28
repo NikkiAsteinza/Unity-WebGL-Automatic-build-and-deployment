@@ -1,7 +1,7 @@
 {
 "companyName": "DefaultCompany",
 "productName": "UnityTools",
-"productVersion": "0.0.93",
+"productVersion": "0.0.96",
 "dataUrl": "WebGL.data.unityweb",
 "wasmCodeUrl": "WebGL.wasm.code.unityweb",
 "wasmFrameworkUrl": "WebGL.wasm.framework.unityweb",
