@@ -65,15 +65,18 @@ jobs:
       # Deployment
       - name: Deploy to gh-page branch
         run: |
+          echo "Applying initial configs"
           sudo chown -R $USER:$USER Build
           git config --global user.email "${{ secrets.GH_EMAIL }}"
           git config --global user.name "${{ secrets.GH_USERNAME }}"
-          ls
+          echo "Stash and reset"
           git add Build/WebGL/*
           git stash push
           git stash list
           git reset --hard
+          echo "Switch to gh-pages"
           git switch -f gh-pages
+          git reset --hard
           echo "Applying stash"
           git stash apply stash@{0}
           git status
