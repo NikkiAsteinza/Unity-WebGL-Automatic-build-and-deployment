@@ -84,7 +84,7 @@ jobs:
       #     TARGET_DIR: "."
       - name: Deploy to gh-page branch
         run: |
-          sudo chmod -R u+rwx Build
+          sudo chown -R $USER:$USER Build
           git config --global user.email "${{ secrets.GH_EMAIL }}"
           git config --global user.name "${{ secrets.GH_USERNAME }}"
           ls
