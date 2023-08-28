@@ -81,6 +81,7 @@ jobs:
           sudo git clean -d -x -f
           echo "Applying stash"
           git stash apply stash@{0}
+          mv -f Build/subdirectory/{.,}* .
           git status
           git add *
           git commit -m "Deployment"
