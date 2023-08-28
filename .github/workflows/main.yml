@@ -70,8 +70,8 @@ jobs:
           git config --global user.email "${{ secrets.GH_EMAIL }}"
           git config --global user.name "${{ secrets.GH_USERNAME }}"
           echo "Stash and reset"
-          git add Build/WebGL/*
-          git stash push -p Build/WebGL/*
+          git add Build/WebGL
+          git stash push -p Build/WebGL
           git stash list
           git reset --hard
           sudo git clean -d -x -f
