@@ -84,7 +84,6 @@ jobs:
       #     TARGET_DIR: "."
       - name: Deploy to gh-page branch
         run: |
-          git stash pop stash@{0}
           sudo chown -R $USER:$USER Build
           git config --global user.email "${{ secrets.GH_EMAIL }}"
           git config --global user.name "${{ secrets.GH_USERNAME }}"
@@ -100,7 +99,6 @@ jobs:
           git commit -m "Deployment"
           git push
           git stash pop stash@{0}
-          git stash list
 # Build job
 
 
