@@ -83,10 +83,14 @@ jobs:
           git reset --hard
           sudo git clean -d -x -f
           echo "Restoring branch"
-
+          git rm -r ./Build
+          git commit -m "Cleaning branch"
+          git push
           echo "Applying stash"
           git stash apply stash@{0}
-          mv -f Build/WebGL/WebGL/{.,}* .
+          cd Build/WebGL/WebGL
+          mv -f ./{.,}* ../../
+          cd ../../
           git status
           git add *
           git commit -m "Deployment"
