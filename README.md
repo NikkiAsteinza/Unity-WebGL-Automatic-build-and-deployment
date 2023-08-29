@@ -19,7 +19,12 @@ title: Git workflow
 ---
 gitGraph
    commit
-   branch gh-pages
+   branch 18-ci-cleaning-deployment-branch
+   checkout 18-ci-cleaning-deployment-branch
+   commit
+   commit
+   checkout main
+   merge 18-ci-cleaning-deployment-branch
    checkout gh-pages
    commit
 ```
