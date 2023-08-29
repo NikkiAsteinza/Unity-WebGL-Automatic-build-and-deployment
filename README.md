@@ -2,6 +2,22 @@
 
 This repository contains a Unity WebGL project that is automatically built and deployed to Github Pages when a pull request to main is created.
 
+```mermaid
+journey
+	title Unity Build job details
+	section Prepare files for deployment
+        Git LFS Sample:6: Unity Build
+		Stash:6: Unity Build
+        Restore:6: Unity Build
+		Clean Target: 6: Unity Build
+        Push: 6: Unity Build
+        Apply Stash: 6: Unity Build
+        Relocate Files: 6: Unity Build
+        Push: 6: Unity Build
+    section GH Pages Deployment
+        Deploy: 6: Pages
+```
+
 - Using [Github Actions](https://github.com/features/actions)
 - Based on [GameCI](https://game.ci/docs/github/getting-started/)
 - Configurable
@@ -66,23 +82,8 @@ Execute the Acquire Activation File job included in the activation.yml file manu
 - ARTIFACT_NAME: The output zip file name.
 - DEPLOYMENT_BRANCH: The source branch for Github Pages.
 
-## Unity Build job details
 
-```mermaid
-journey
-	title WebGL Automatic Build and Deployment
-	section Prepare files for deployment
-        Git LFS Sample:6: Unity Build
-		Stash:6: Unity Build
-        Restore:6: Unity Build
-		Clean Target: 6: Unity Build
-        Push: 6: Unity Build
-        Apply Stash: 6: Unity Build
-        Relocate Files: 6: Unity Build
-        Push: 6: Unity Build
-    section GH Pages Deployment
-        Deploy: 6: Pages
-```
+
 
 
 
