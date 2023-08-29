@@ -53,48 +53,47 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          targetPlatform: WebGL
-          buildsPath: Build
+          targetPlatform: $TARGET_PLATFORM
+          buildsPath: $BUILD_PATH
           allowDirtyBuild: true
       # Output: Artifact
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: Build
-          path: Build/WebGL
+          name: $ARTIFACT_NAME
+          path: $BUILD_PATH
       # Deployment
       - name: Stash build result and reset local changes
         run: |
           echo "Applying initial configs"
-          sudo chown -R $USER:$USER Build
+          sudo chown -R $USER:$USER $BUILD_PATH
           git config --global user.email "${{ secrets.GH_EMAIL }}"
           git config --global user.name "${{ secrets.GH_USERNAME }}"
           echo "Stash and reset"
-          git add Build/WebGL
-          git stash push Build/WebGL
+          git add $BUILD_PATH/$TARGET_PLATFORM
+          git stash push $BUILD_PATH/$TARGET_PLATFORM
           git stash list
           git reset --hard
           sudo git clean -d -x -f
     # Deployment
       - name: Cleaning gh-pages branch
         run: |
-          echo "Switch to gh-pages"
-          git switch -f gh-pages
+          echo "Switch to $DEPLOYMENT_BRANCH"
+          git switch -f $DEPLOYMENT_BRANCH
           git reset --hard
           sudo git clean -d -x -f
-      - name: Applying stashed files to gh-pages
+      - name: Applying stashed files to $DEPLOYMENT_BRANCH
         run: |
           echo "Applying stash"
           git stash apply stash@{0}
-          cd Build/WebGL/WebGL/
-          git restore *
-          pwd
+          cd $BUILD_PATH/$TARGET_PLATFORM
+          ls
           git status
       - name: Moving files to root directory
         run: |
-          mv -f * ../../../
-          cd ../../../
-          rm -r Build
+          mv -f * ../../
+          cd ../../
+          rm -r $BUILD_PATH
           pwd
       - name: Pusing deployment to gh-pages branch
         run: |
