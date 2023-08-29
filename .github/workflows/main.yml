@@ -53,47 +53,47 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          targetPlatform: ${{ env.TARGET_PLATFORM }}
-          buildsPath: ${{ env.BUILD_PATH }}
+          targetPlatform: ${{ vars.TARGET_PLATFORM }}
+          buildsPath: ${{ vars.BUILD_PATH }}
           allowDirtyBuild: true
       # Output: Artifact
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.BUILD_PATH }}
+          name: ${{ vars.ARTIFACT_NAME }}
+          path: ${{ vars.BUILD_PATH }}
       # Deployment
       - name: Stash build result and reset local changes
         run: |
           echo "Applying initial configs"
-          sudo chown -R $USER:$USER ${{ env.BUILD_PATH }}
+          sudo chown -R $USER:$USER ${{ vars.BUILD_PATH }}
           git config --global user.email "${{ secrets.GH_EMAIL }}"
           git config --global user.name "${{ secrets.GH_USERNAME }}"
           echo "Stash and reset"
-          git add ${{ env.BUILD_PATH }}/${{ env.TARGET_PLATFORM }}L
-          git stash push ${{ env.BUILD_PATH }}/${{ env.TARGET_PLATFORM }}
+          git add ${{ vars.BUILD_PATH }}/${{ vars.TARGET_PLATFORM }}L
+          git stash push ${{ vars.BUILD_PATH }}/${{ vars.TARGET_PLATFORM }}
           git stash list
           git reset --hard
           sudo git clean -d -x -f
     # Deployment
       - name: Cleaning gh-pages branch
         run: |
-          echo "Switch to ${{ env.DEPLOYMENT_BRANCH }}"
-          git switch -f ${{ env.DEPLOYMENT_BRANCH }}
+          echo "Switch to ${{ vars.DEPLOYMENT_BRANCH }}"
+          git switch -f ${{ vars.DEPLOYMENT_BRANCH }}
           git reset --hard
           sudo git clean -d -x -f
-      - name: Applying stashed files to ${{ env.DEPLOYMENT_BRANCH }}
+      - name: Applying stashed files to ${{ vars.DEPLOYMENT_BRANCH }}
         run: |
           echo "Applying stash"
           git stash apply stash@{0}
-          cd ${{ env.BUILD_PATH }}/${{ env.TARGET_PLATFORM }}
+          cd ${{ vars.BUILD_PATH }}/${{ vars.TARGET_PLATFORM }}
           ls
           git status
       - name: Moving files to root directory
         run: |
           mv -f * ../../
           cd ../../../
-          rm -r ${{ env.BUILD_PATH }}
+          rm -r ${{ vars.BUILD_PATH }}
           pwd
       - name: Pusing deployment to gh-pages branch
         run: |
