@@ -1,9 +1,5 @@
 # Unity WebGL: Automatic build and gh-pages deployment
 
-This repository contains a Unity WebGL project that is automatically built by using Github Actions and following certain rules.
-
-Based on [GameCI](https://game.ci/docs/github/getting-started/)
-
 ```mermaid
 journey
 	title WebGL Automatic Build and Deployment
@@ -17,20 +13,26 @@ journey
     section GH Pages Deployment
         Deploy: 6: Pages
 ```
-
 ```mermaid
-flowchart LR
-flowchart LR
-    G[GameCI - Git LFS Sample] --> H[Stash build result and reset local changes]
-    H --> I[Cleaning gh-pages branch]
-    I --> J[Applying stashed files to gh-pages]
-    J --> K[Moving files to root directory]
-    K --> L[Pushing to gh-pages]
+---
+title: Git workflow
+---
+gitGraph
+   commit
+   branch gh-pages
+   checkout gh-pages
+   commit
 ```
 
-## SUPPORT
+This repository contains a Unity WebGL project that is automatically built by using Github Actions and following certain rules.
 
-It only supports **WebGL not compressed builds**.
+Based on [GameCI](https://game.ci/docs/github/getting-started/)
+
+## SUPPORT
+- Git LFS
+
+- **Platforms**
+	- WebGL (**Not compressed builds**).
 
 ## REQUIREMENTS
 
