@@ -1,66 +1,48 @@
 # Unity WebGL: Automatic build and gh-pages deployment
 
-```mermaid
-journey
-	title WebGL Automatic Build and Deployment
-	section Prepare files for deployment
-        Git LFS Sample:6: Unity Build
-		Stash and Restore:6: Unity Build
-		Clean Target: 6: Unity Build
-        Apply Stash: 6: Unity Build
-        Relocate Files: 6: Unity Build
-        Push: 6: Unity Build
-    section GH Pages Deployment
-        Deploy: 6: Pages
-```
+This repository contains a Unity WebGL project that is automatically built and deployed to Github Pages when a pull request to main is created.
 
-```mermaid
----
-title: Git workflow
----
-gitGraph
-   commit
-   branch feature-branch
-   checkout feature-branch
-   commit
-   commit
-   checkout main
-   merge feature-branch
-   branch gh-pages
-   checkout gh-pages
-   commit id: "Deployment" type: HIGHLIGHT
-```
-
-This repository contains a Unity WebGL project that is automatically built by using Github Actions and following certain rules.
-
+Using [Github Actions](https://github.com/features/actions)
 Based on [GameCI](https://game.ci/docs/github/getting-started/)
 
-## SUPPORT
-- Git LFS
+## Target platforms and supported tools
 
-- **Platforms**
-	- WebGL (**Not compressed builds**).
-
-## REQUIREMENTS
-
-### Acquire Activation File
-[GameCI Documentation](https://game.ci/docs/github/activation).
+| **Git LFS** |    **WebGL**   | **Standalone** | **iOS** | **Android** |
+|-------------|:--------------:|:--------------:|:-------:|:-----------:|
+| X           |        X       |                |         |             |
+|             | Not Compressed |                |         |             |
 
 
-## OUTPUT
+## Output
 
-### Artifact
-Downloadable zip with the build files.
+ - **Artifact:** Downloadable zip with the build files.
 
-### Automatic deployment to Github Pages
-Build content is deployed to the target branch, where Github pages should be pointing to.
+ - **Automatic deployment to Github Pages:** Build content is deployed to the target branch, where Github pages should be pointing to.
 
-## CONFIGURABLE
+## Setup guide
 
-It is based on the use of repo enviroment variables:
+### Assumptions
+- Target repo already created.
+- Target repo contains a gitignore file.
+- Git LFS is configured.
 
-- TARGET_PLATFORM
-- BUILD_PATH
-- ARTIFACT_NAME
-- DEPLOYMENT_BRANCH
+### Steps
+
+#### Adding necessary files to the repo
+1. Create a .github folder
+2. Create a workflows folder inside of the recently created .github folder
+3. Download the [main](file:///d:/.github/workflows/main.yml) and the [activation](file:///d:/.github/workflows/activation.yml) files and add them to the workflow folder.
+
+#### Setup Pages and set source
+1. DEPLOYMENT_BRANCH: Create the branch where you want to host your deployed WebGL site.
+2. Enable pages and set the DEPLOYMENT_BRANCH as the build and deployment source.
+
+#### Acquire the activation file
+Execute the Acquire Activation File job included in the activation.yml file manually from the Actions tab and [GameCI Documentation](https://game.ci/docs/github/activation).
+
+#### Setup repository variables
+- TARGET_PLATFORM: Unity project build target platform
+- BUILD_PATH: Were the build will be created. This folder should not be included in the .gitignore file.
+- ARTIFACT_NAME: The output zip file name.
+- DEPLOYMENT_BRANCH: The source branch for Github Pages.
 
