@@ -20,15 +20,15 @@ title: Git workflow
 ---
 gitGraph
    commit
-   branch 18-ci-cleaning-deployment-branch
-   checkout 18-ci-cleaning-deployment-branch
+   branch feature-branch
+   checkout feature-branch
    commit
    commit
    checkout main
-   merge 18-ci-cleaning-deployment-branch
+   merge 18-ci-cleaning-deployment-branch id: "Deployment" type: HIGHLIGHT
    branch gh-pages
    checkout gh-pages
-   commit
+   commit type: HIGHLIGHT
 ```
 
 This repository contains a Unity WebGL project that is automatically built by using Github Actions and following certain rules.
