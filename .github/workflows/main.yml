@@ -1,7 +1,8 @@
 name: Unity WebGL Automatic Build 👽✨🚀
 on:
   push:
-    branches: '**'
+    branches:
+      - main
   workflow_dispatch:
 permissions:
   contents: read
