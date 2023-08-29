@@ -1,2 +1,2 @@
-# UnityTools
-Unity tools package
+# Unity WebGL: Automatic build and gh-pages deployment
+
