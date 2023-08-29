@@ -92,6 +92,7 @@ jobs:
           ls
           mv -f * ../../../
           cd ../../../
+          rm -r ${{ vars.BUILD_PATH }}
           ls
           pwd
       - name: Pushing deployment to gh-pages branch
