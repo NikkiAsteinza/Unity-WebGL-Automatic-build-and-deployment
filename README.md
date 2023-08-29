@@ -1,22 +1,3 @@
-```mermaid
----
-title: Job details - Git workflow
----
-gitGraph
-   commit
-   branch feature-branch
-   checkout feature-branch
-   commit
-   commit
-   checkout main
-   merge feature-branch
-   commit id: "Stash build and reset" type: REVERSE
-   branch gh-pages
-   checkout gh-pages
-   commit id: "Cleaning branch" type: HIGHLIGHT
-   commit id: "Deployment: Applied & relocated stash" type: HIGHLIGHT
-```
-
 # Unity WebGL: Automatic build and Pages deployment
 
 This repository contains a Unity WebGL project that is automatically built and deployed to Github Pages when a pull request to main is created.
@@ -38,6 +19,25 @@ This repository contains a Unity WebGL project that is automatically built and d
  - **Artifact:** Downloadable zip with the build files.
 
  - **Automatic deployment to Github Pages:** Build content is deployed to the target branch, where Github pages should be pointing to.
+
+```mermaid
+---
+title: Git workflow
+---
+gitGraph
+   commit
+   branch feature-branch
+   checkout feature-branch
+   commit
+   commit
+   checkout main
+   merge feature-branch
+   commit id: "Stash build and reset" type: REVERSE
+   branch gh-pages
+   checkout gh-pages
+   commit id: "Cleaning branch" type: HIGHLIGHT
+   commit id: "Deployment: Applied & relocated stash" type: HIGHLIGHT
+```
 
 ## Setup guide
 
