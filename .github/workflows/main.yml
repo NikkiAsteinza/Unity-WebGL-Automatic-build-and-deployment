@@ -76,20 +76,29 @@ jobs:
           git reset --hard
           sudo git clean -d -x -f
     # Deployment
-      - name: Clean gh-pages
+      - name: Cleaning gh-pages branch
         run: |
           echo "Switch to gh-pages"
           git switch -f gh-pages
           git reset --hard
           sudo git clean -d -x -f
-          
-      - name: Apply stashed files to gh-pages
+      - name: Applying stashed files to gh-pages
         run: |
           echo "Applying stash"
           git stash apply stash@{0}
-          cd Build/WebGL/WebGL
+          cd Build/WebGL/WebGL/
+          git restore *
+          pwd
+          git status
+      - name: Moving files to root directory
+        run: |
           mv -f * ../../../
           cd ../../../
+          rm -r Build
+          pwd
+      - name: Pusing deployment to gh-pages branch
+        run: |
+          pwd
           git status
           git add *
           git commit -m "Deployment"
