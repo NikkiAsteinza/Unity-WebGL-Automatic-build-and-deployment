@@ -83,6 +83,7 @@ jobs:
           git switch -f ${{ vars.DEPLOYMENT_BRANCH }}
           git reset --hard
           sudo git clean -d -x -f
+          rm -r *
       - name: Applying stashed files to ${{ vars.DEPLOYMENT_BRANCH }}
         run: |
           echo "Applying stash"
