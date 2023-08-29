@@ -2,7 +2,11 @@ name: Unity WebGL Automatic Build 👽✨🚀
 on:
   push:
     branches:
-      - main
+      - '**'
+  # pull_request:
+  #   branches:    
+  #     - 'releases/**'
+  #     - '!releases/**-alpha'
   workflow_dispatch:
 permissions:
   contents: read
@@ -84,6 +88,8 @@ jobs:
           git reset --hard
           sudo git clean -d -x -f
           rm -r *
+          git commit -m "cleaning branch"
+          git push
       - name: Applying stashed files to ${{ vars.DEPLOYMENT_BRANCH }}
         run: |
           echo "Applying stash"
