@@ -26,6 +26,7 @@ gitGraph
    commit
    checkout main
    merge 18-ci-cleaning-deployment-branch
+   branch gh-pages
    checkout gh-pages
    commit
 ```
