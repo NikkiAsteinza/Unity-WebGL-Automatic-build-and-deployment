@@ -25,10 +25,10 @@ gitGraph
    commit
    commit
    checkout main
-   merge feature-branch id: "Deployment" type: HIGHLIGHT
+   merge feature-branch
    branch gh-pages
    checkout gh-pages
-   commit type: HIGHLIGHT
+   commit id: "Deployment" type: HIGHLIGHT
 ```
 
 This repository contains a Unity WebGL project that is automatically built by using Github Actions and following certain rules.
