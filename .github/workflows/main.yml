@@ -90,8 +90,8 @@ jobs:
         run: |
           cd ${{ vars.BUILD_PATH }}/${{ vars.TARGET_PLATFORM }}/${{ vars.TARGET_PLATFORM }}
           ls
-          mv -f * ../../
-          cd ../../
+          mv -f * ../../../
+          cd ../../../
           ls
           pwd
       - name: Pushing deployment to gh-pages branch
