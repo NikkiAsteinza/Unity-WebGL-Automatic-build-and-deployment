@@ -70,7 +70,7 @@ jobs:
           git config --global user.email "${{ secrets.GH_EMAIL }}"
           git config --global user.name "${{ secrets.GH_USERNAME }}"
           echo "Stash and reset"
-          git add ${{ vars.BUILD_PATH }}/${{ vars.TARGET_PLATFORM }}L
+          git add ${{ vars.BUILD_PATH }}/${{ vars.TARGET_PLATFORM }}
           git stash push ${{ vars.BUILD_PATH }}/${{ vars.TARGET_PLATFORM }}
           git stash list
           git reset --hard
