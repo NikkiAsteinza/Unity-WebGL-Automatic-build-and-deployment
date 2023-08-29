@@ -13,6 +13,7 @@ journey
     section GH Pages Deployment
         Deploy: 6: Pages
 ```
+
 ```mermaid
 ---
 title: Git workflow
