@@ -86,12 +86,12 @@ jobs:
         run: |
           echo "Applying stash"
           git stash apply stash@{0}
-          cd ${{ vars.BUILD_PATH }}/${{ vars.TARGET_PLATFORM }}/${{ vars.TARGET_PLATFORM }}
-          ls
       - name: Moving files to root directory
         run: |
-          mv -f * ../../../
-          cd ../../../
+          cd ${{ vars.BUILD_PATH }}/${{ vars.TARGET_PLATFORM }}/${{ vars.TARGET_PLATFORM }}
+          ls
+          mv -f * ../../
+          cd ../../
           ls
           pwd
       - name: Pushing deployment to gh-pages branch
