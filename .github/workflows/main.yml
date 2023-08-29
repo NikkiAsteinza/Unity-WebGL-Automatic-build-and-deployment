@@ -93,7 +93,7 @@ jobs:
         run: |
           mv -f * ../../
           cd ../../../
-          rm -r ${{ vars.TARGET_PLATFORM }}
+          ls
           pwd
       - name: Pusing deployment to gh-pages branch
         run: |

@@ -1,20 +1,33 @@
 # Unity WebGL: Automatic build and gh-pages deployment
 
-This repository contains a Unity WEBGL project that is automatically build.
+This repository contains a Unity WebGL project that is automatically built by using Github Actions and following certain rules.
 
-SUPPORT
+Based on [GameCI](https://game.ci/docs/github/getting-started/)
 
-It only support non compressed builds.
+## SUPPORT
 
-REQUIREMENTS
+It only supports **WebGL not compressed builds**.
 
-Acquiring an activation code
+## REQUIREMENTS
 
-OUTPUTS:
+### Acquire Activation File
+[GameCI Documentation](https://game.ci/docs/github/activation).
 
-- Artifact: downloadable zip with the build.
-- Automatic deployment to Github Pages
 
-CONFIGURABLE
+## OUTPUT
 
-It is based on the use of repo enviroment variables
+### Artifact
+Downloadable zip with the build files.
+
+### Automatic deployment to Github Pages
+Build content is deployed to the target branch, where Github pages should be pointing to.
+
+## CONFIGURABLE
+
+It is based on the use of repo enviroment variables:
+
+- TARGET_PLATFORM
+- BUILD_PATH
+- ARTIFACT_NAME
+- DEPLOYMENT_BRANCH
+
