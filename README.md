@@ -25,7 +25,7 @@ gitGraph
    commit
    commit
    checkout main
-   merge 18-ci-cleaning-deployment-branch id: "Deployment" type: HIGHLIGHT
+   merge feature-branch id: "Deployment" type: HIGHLIGHT
    branch gh-pages
    checkout gh-pages
    commit type: HIGHLIGHT
