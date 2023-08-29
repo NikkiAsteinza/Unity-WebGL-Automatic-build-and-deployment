@@ -88,8 +88,8 @@ jobs:
           echo "Applying stash"
           git stash apply stash@{0}
           cd Build/WebGL/WebGL
-          mv -f * ../../
-          cd ../../
+          mv -f * ../../../
+          cd ../../../
           git status
           git add *
           git commit -m "Deployment"
