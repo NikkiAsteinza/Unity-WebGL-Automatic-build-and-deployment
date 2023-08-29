@@ -6,29 +6,22 @@ Based on [GameCI](https://game.ci/docs/github/getting-started/)
 
 ```mermaid
 journey
-	title Me studying for exams
-	section Exam is announced
-		I start studying: 1: Me
-		Make notes: 2: Me
-		Ask friend for help: 3: Me, Friend
-		We study togther: 5: Me, Friend
-	section Exam Day
-		Syllabys is incomplete: 2: Me
-		Give exam: 1: Me, Friend
-	section Result Declared
-		I passed the exam with destinction!: 5: Me
-		Friend barely gets passing marks: 2: Friend
+	title WebGL Automatic Build and Deployment
+	section Prepare files for deployment
+        Git LFS Sample:6: Unity Build
+		Stash and Restore:6: Unity Build
+		Clean Target: 6: Unity Build
+        Apply Stash: 6: Unity Build
+        Relocate Files: 6: Unity Build
+        Push: 6: Unity Build
+    section GH Pages Deployment
+        Deploy: 6: Pages
 ```
 
 ```mermaid
 flowchart LR
-    A[Checkout Repository] --> B[Create LFS File list]
-    B --> C[Restore LFS cache]
-    C --> D[Git LFS Pull]
-    D --> E[Cache]
-    E --> F[Build project]
-    F --> G[Upload Build Artifact]
-    G --> H[Stash build result and reset local changes]
+flowchart LR
+    G[GameCI - Git LFS Sample] --> H[Stash build result and reset local changes]
     H --> I[Cleaning gh-pages branch]
     I --> J[Applying stashed files to gh-pages]
     J --> K[Moving files to root directory]
