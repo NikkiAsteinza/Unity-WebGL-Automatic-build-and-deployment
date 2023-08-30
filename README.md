@@ -2,6 +2,8 @@
 
 This repository contains a Unity WebGL project that is automatically built and deployed to Github Pages when a pull request to main is created.
 
+[![Unity WebGL Automatic Build 👽✨🚀](https://github.com/NikkiAsteinza/Unity-WebGL-Automatic-build-and-deployment/actions/workflows/main.yml/badge.svg)](https://github.com/NikkiAsteinza/Unity-WebGL-Automatic-build-and-deployment/actions/workflows/main.yml)
+
 ```mermaid
 journey
 	title Unity Build job details
