@@ -14,6 +14,7 @@ permissions:
 concurrency:
   group: "pages"
   cancel-in-progress: false
+
 jobs:
   build:
     name: Unity Build 👽
@@ -21,15 +22,16 @@ jobs:
     steps:
       # Checkout (without LFS)
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
-          token: ${{secrets.PAT}}
+          token: ${{ secrets.PAT }}
+
       # Git LFS
       - name: Create LFS file list
         run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
 
       - name: Restore LFS cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         id: lfs-cache
         with:
           path: .git/lfs
@@ -41,15 +43,15 @@ jobs:
           git add .
           git reset --hard
 
-      # # Cache
-      - uses: actions/cache@v2
+      # Cache de Library de Unity
+      - uses: actions/cache@v4
         with:
           path: Library
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
           restore-keys: |
             Library-
 
-      # # Build
+      # Build
       - name: Build project
         uses: game-ci/unity-builder@v4
         env:
@@ -60,12 +62,17 @@ jobs:
           targetPlatform: ${{ vars.TARGET_PLATFORM }}
           buildsPath: ${{ vars.BUILD_PATH }}
           allowDirtyBuild: true
+          # Si tu proyecto está en 2022.3.59f1 y quieres fijarlo explícitamente,
+          # descomenta la siguiente línea (no cambia funcionalidad si coincide):
+          # unityVersion: 2022.3.59f1
+
       # Output: Artifact
       - name: Upload Build Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ vars.ARTIFACT_NAME }}
           path: ${{ vars.BUILD_PATH }}
+
       # Deployment
       - name: Stash build result and reset local changes
         run: |
@@ -79,7 +86,7 @@ jobs:
           git stash list
           git reset --hard
           sudo git clean -d -x -f
-    # Deployment
+
       - name: Cleaning gh-pages branch
         run: |
           echo "Switch to ${{ vars.DEPLOYMENT_BRANCH }}"
@@ -88,12 +95,14 @@ jobs:
           sudo git clean -d -x -f
           rm -r *
           git add *
-          git commit -m "cleaning branch"
+          git commit -m "cleaning branch" || echo "Nothing to commit"
           git push
+
       - name: Applying stashed files to ${{ vars.DEPLOYMENT_BRANCH }}
         run: |
           echo "Applying stash"
           git stash apply stash@{0}
+
       - name: Copying files to root directory
         run: |
           cd ${{ vars.BUILD_PATH }}/${{ vars.TARGET_PLATFORM }}/${{ vars.TARGET_PLATFORM }}
@@ -103,12 +112,13 @@ jobs:
           rm -r ${{ vars.BUILD_PATH }}
           ls
           pwd
+
       - name: Pushing deployment to gh-pages branch
         run: |
           pwd
           git status
           git add *
-          git commit -m "Deployment"
+          git commit -m "Deployment" || echo "Nothing to commit"
           git push
           git reset --hard
           sudo git clean -d -x -f
