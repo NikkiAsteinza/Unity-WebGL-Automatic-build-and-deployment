@@ -1,17 +1,17 @@
-name: Acquire activation file 🔐
+name: Activate Unity license (recommended) 🔐
 on: [workflow_dispatch]
+
 jobs:
-  activation:
-    name: Request manual activation file 
+  activate:
+    name: Activate Unity via secrets
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      # Request manual activation file
-      - name: Request manual activation file 🔑
-        id: getManualLicenseFile
-        uses: game-ci/unity-request-activation-file@v2
-      # Upload artifact (Unity_v2021.3.16f1.alf)
-      - name: Expose as artifact 📦
-        uses: actions/upload-artifact@v2
+      - name: Activate Unity
+        uses: game-ci/unity-activate@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}   # pega aquí el contenido del .ulf
+          # UNITY_EMAIL / UNITY_PASSWORD solo si tu flujo lo requiere
         with:
-          name: ${{ steps.getManualLicenseFile.outputs.filePath }}
-          path: ${{ steps.getManualLicenseFile.outputs.filePath }}
+          unityVersion: 2022.3.59f1
