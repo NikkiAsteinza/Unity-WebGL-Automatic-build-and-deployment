@@ -9,7 +9,7 @@ jobs:
       contents: read
     steps:
       - name: Activate Unity
-        uses: game-ci/unity-activate@v3
+        uses: game-ci/unity-activate@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}   # pega aquí el contenido del .ulf
           # UNITY_EMAIL / UNITY_PASSWORD solo si tu flujo lo requiere
