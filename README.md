@@ -66,6 +66,13 @@ gitGraph
 
 ### Steps
 
+#### Pipeline prerequisites
+- **Unity license activation**: Request a personal license and generate the `UNITY_LICENSE` file following the [GameCI activation guide](https://game.ci/docs/github/activation).
+- **GitHub secrets**: Create the following repository secrets so the workflow can authenticate with Unity and GitHub:
+  - `PAT`: Personal access token with `repo` scope to allow pushing to the deployment branch.
+  - `UNITY_LICENSE`, `UNITY_EMAIL`, `UNITY_PASSWORD`: Credentials required by the Unity Builder action.
+  - `GH_EMAIL`, `GH_USERNAME`: Identity used when the workflow commits deployment changes.
+
 #### Adding necessary files to the repo
 1. Create a .github folder
 2. Create a workflows folder inside of the recently created .github folder
@@ -78,11 +85,12 @@ gitGraph
 #### Acquire the activation file
 Execute the Acquire Activation File job included in the activation.yml file manually from the Actions tab and [GameCI Documentation](https://game.ci/docs/github/activation).
 
-#### Setup repository variables
-- TARGET_PLATFORM: Unity project build target platform
-- BUILD_PATH: Were the build will be created. This folder should not be included in the .gitignore file.
-- ARTIFACT_NAME: The output zip file name.
-- DEPLOYMENT_BRANCH: The source branch for Github Pages.
+#### Configure pipeline variables
+Define the following repository variables from **Settings → Secrets and variables → Actions → Variables** so the workflow can locate build outputs and target branch information:
+- `TARGET_PLATFORM`: Unity project build target platform.
+- `BUILD_PATH`: Directory where the build will be created. This folder should not be ignored by git.
+- `ARTIFACT_NAME`: The output zip file name.
+- `DEPLOYMENT_BRANCH`: The source branch for Github Pages deployments.
 
 
 
